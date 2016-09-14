@@ -1,0 +1,10 @@
+---
+- src: git@github.com:ANXS/postgresql.git
+  scm: git
+  version: v1.4.0
+  path: external-roles
+ 
+- src: git@github.com:rvm/rvm1-ansible.git
+  scm: git
+  version: v1.3.8
+  path: external-roles

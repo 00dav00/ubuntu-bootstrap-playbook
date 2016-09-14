@@ -1,0 +1,6 @@
+- hosts: local
+  vars_files:
+  - ../playbook_vars/bootstrap.yml
+  - ../playbook_vars/database.yml
+  roles:
+    - { role: postgresql, become: yes, become_method: sudo }

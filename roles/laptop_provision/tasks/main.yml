@@ -1,0 +1,56 @@
+- name: Add required repositories
+  apt_repository: repo={{ item }} state=present
+  with_items:
+    - "deb http://download.virtualbox.org/virtualbox/debian xenial contrib"
+    - "ppa:gnome-terminator" 
+
+- name: Register keys
+  command: bash -c "{{ item }}"
+  with_items:
+    - "wget -q https://www.virtualbox.org/download/oracle_vbox_2016.asc -O- | sudo apt-key add -"
+    - "wget -q https://www.virtualbox.org/download/oracle_vbox.asc -O- | sudo apt-key add -"
+
+
+- name: Apt update
+  apt: update_cache=yes
+
+- name: Install required packages
+  apt: name={{ item }} state=present
+  with_items:
+    - tmux
+    - htop
+    - vim
+    - git
+    - curl
+    - postgresql
+    - postgresql-client
+    - postgresql-contrib
+    - tree
+    - virtualbox-5.0
+    - dkms
+    - terminator
+    - nmap
+    - openssl
+    - libpq-dev
+    - emacs
+    - kolourpaint4
+    - enigmail
+
+- name: Backup /etc/stab  
+  copy: src=/etc/fstab dest=/etc/fstab.bkp
+
+
+- name: Set drive as home directory
+  lineinfile: dest=/etc/fstab regexp="^{{ item }}\s" line="{{ item }}" state=present
+  with_items: 
+    - "UUID=09a4ea35-14cf-4889-aec5-3515e15a2661   /home    ext4          defaults       0       2"
+  tags:
+    - fstab
+
+- name: Mount partitions
+  command: mount -a
+  tags:
+    - fstab
+
+
+# agregar configuracion PSD

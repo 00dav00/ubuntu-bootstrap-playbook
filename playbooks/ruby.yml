@@ -1,0 +1,6 @@
+- hosts: local
+  vars_files:
+    - ../playbook_vars/bootstrap.yml
+    - ../playbook_vars/ruby.yml
+  roles:
+    - { role: rvm1-ansible }

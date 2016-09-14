@@ -1,0 +1,10 @@
+---
+rvm1_rubies:
+  - ruby-2.3.1
+rvm1_rvm_version: stable
+rvm1_rvm_check_for_updates: True
+rvm1_install_path: '/home/{{ deploy_username }}/.rvm'
+rvm1_install_flags: '--user-install '
+rvm1_ruby_install_flags: '--autolibs=0'
+rvm1_user: '{{ deploy_username }}'
+rvm1_autolib_mode: 0
